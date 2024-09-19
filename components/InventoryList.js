@@ -16,28 +16,28 @@ const InventoryList = () => {
 //    fetchItems();
 //  }, []);
 
-  // useEffect(() => {
-  //   getItemsFromDatabase((fetchedItems) => {
-  //     console.log('Fetched items from database:', fetchedItems);
-  //     console.log('Fetched items from database:777777777777777777777777777777', fetchedItems);
-  //     setItems(fetchedItems);
-  //   });
-  // }, []);
+   useEffect(() => {
+     getItemsFromDatabase((fetchedItems) => {
+       console.log('Fetched items from database:', fetchedItems);
+       console.log('Fetched items from database:777777777777777777777777777777', fetchedItems);
+       setItems(fetchedItems);
+     });
+   }, []);
 
-  useEffect(() => {
-    console.log('Setting up database...');
-    setupDatabase();
-    console.log('Adding test item...');
-    const testItem = {
-      name: 'Test Item',
-      cost_price: 10,
-      delivery_price: 2,
-      quantity: 5,
-      weight: 1,
-      sale_price: 15
-    };
-    addItemToDatabase(testItem, fetchItems);  // Добавляем элемент сразу после создания таблицы
-  }, []);
+//  useEffect(() => {
+//    console.log('Setting up database...');
+//    setupDatabase();
+//    console.log('Adding test item...');
+//    const testItem = {
+//      name: 'Test Item',
+//      cost_price: 10,
+//      delivery_price: 2,
+//      quantity: 5,
+//      weight: 1,
+//      sale_price: 15
+//    };
+//    addItemToDatabase(testItem, fetchItems);  // Добавляем элемент сразу после создания таблицы
+//  }, []);
 
   const fetchItems = useCallback(() => {
     console.log('Fetching items...');
