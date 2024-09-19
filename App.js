@@ -1,21 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
 import InventoryList from './components/InventoryList';
+ import React from 'react';
+ import { View, Text, StyleSheet } from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <InventoryList />
-      <StatusBar style="dark" /> {/* Use "dark" or "light" based on your preference */}
+          <Text style={styles.title}>Start App1!</Text>
+          <InventoryList />
+          <StatusBar style="dark" />
+          <Text style={styles.title}>Start App2!</Text>
     </View>
-  );
-}
+    );
+  }
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5', // Changed to a light gray for better contrast
-    padding: 16, // Added padding for some space around the edges
+    backgroundColor: '#FF69B4',
+    padding: 16,
+  },
+  title: {
+    fontSize: 34,
+    marginBottom: 16,
+    color: '#9ACD32',
   },
 });

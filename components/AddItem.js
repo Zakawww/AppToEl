@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { View, TextInput, Button, Alert, StyleSheet } from 'react-native';
 
 const AddItem = ({ onAddItem }) => {
-  const [name, setName] = useState('');
   const [costPrice, setCostPrice] = useState('');
   const [deliveryPrice, setDeliveryPrice] = useState('');
   const [quantity, setQuantity] = useState('');
@@ -10,21 +9,41 @@ const AddItem = ({ onAddItem }) => {
   const [salePrice, setSalePrice] = useState('');
 
   const handleAddItem = () => {
-    if (!name || isNaN(costPrice) || isNaN(deliveryPrice) || isNaN(quantity) || isNaN(weight) || isNaN(salePrice)) {
+    // Логирование значений перед парсингом
+    console.log('Входные значения:', { name, costPrice, deliveryPrice, quantity, weight, salePrice });
+
+    const parsedCostPrice = parseFloat(costPrice);
+    const parsedDeliveryPrice = parseFloat(deliveryPrice);
+    const parsedQuantity = parseInt(quantity, 10);
+    const parsedWeight = parseFloat(weight);
+    const parsedSalePrice = parseFloat(salePrice);
+
+    if (
+      !name ||
+      isNaN(parsedCostPrice) || !isFinite(parsedCostPrice) ||
+      isNaN(parsedDeliveryPrice) || !isFinite(parsedDeliveryPrice) ||
+      isNaN(parsedQuantity) || !isFinite(parsedQuantity) ||
+      isNaN(parsedWeight) || !isFinite(parsedWeight) ||
+      isNaN(parsedSalePrice) || !isFinite(parsedSalePrice)
+    ) {
       Alert.alert('Ошибка', 'Пожалуйста, заполните все поля корректно.');
       return;
     }
 
-    onAddItem({
+    const item = {
       name,
-      cost_price: parseFloat(costPrice),
-      delivery_price: parseFloat(deliveryPrice),
-      quantity: parseInt(quantity, 10),
-      weight: parseFloat(weight),
-      sale_price: parseFloat(salePrice),
-    });
+      cost_price: parsedCostPrice,
+      delivery_price: parsedDeliveryPrice,
+      quantity: parsedQuantity,
+      weight: parsedWeight,
+      sale_price: parsedSalePrice,
+    };
 
-    // Reset the form
+    console.log('Добавленный товар:', item); // Лог добавленного товара
+
+    onAddItem(item);
+
+    // Сброс полей ввода
     setName('');
     setCostPrice('');
     setDeliveryPrice('');
